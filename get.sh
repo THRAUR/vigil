@@ -10,4 +10,5 @@ trap 'rm -rf "$TMP"' EXIT
 echo "→ Downloading the latest Vigil release from github.com/$REPO"
 curl -fsSL "https://github.com/$REPO/releases/latest/download/Vigil.zip" -o "$TMP/Vigil.zip"
 ditto -x -k "$TMP/Vigil.zip" "$TMP"
-"$TMP/Vigil/install.sh" "$@" </dev/tty
+# stdin is this script when piped from curl; sudo asks for the password on the terminal itself.
+"$TMP/Vigil/install.sh" "$@" </dev/null
